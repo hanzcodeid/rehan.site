@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>rehan.web.id | Professional Portfolio - Network Engineer & Web Developer</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #ffffff;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #1a1a2e;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1, h2, h3, h4, .logo, .nav-links a, .btn, .stat-label, .portfolio-tag, .blog-date, .footer-col h4 {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        /* ========== SCROLL REVEAL ========== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s ease-out;
+        }
+        .stagger-item.reveal-stagger {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Delay untuk stagger items */
+        .stat-box:nth-child(1) { transition-delay: 0s; }
+        .stat-box:nth-child(2) { transition-delay: 0.1s; }
+        .stat-box:nth-child(3) { transition-delay: 0.2s; }
+        
+        .social-icon:nth-child(1) { transition-delay: 0s; }
+        .social-icon:nth-child(2) { transition-delay: 0.05s; }
+        .social-icon:nth-child(3) { transition-delay: 0.1s; }
+        .social-icon:nth-child(4) { transition-delay: 0.15s; }
+        .social-icon:nth-child(5) { transition-delay: 0.2s; }
+        
+        .portfolio-card:nth-child(1) { transition-delay: 0s; }
+        .portfolio-card:nth-child(2) { transition-delay: 0.1s; }
+        .portfolio-card:nth-child(3) { transition-delay: 0.2s; }
+        .portfolio-card:nth-child(4) { transition-delay: 0.3s; }
+        .portfolio-card:nth-child(5) { transition-delay: 0.4s; }
+        .portfolio-card:nth-child(6) { transition-delay: 0.5s; }
+        
+        .skill-item:nth-child(1) { transition-delay: 0s; }
+        .skill-item:nth-child(2) { transition-delay: 0.05s; }
+        .skill-item:nth-child(3) { transition-delay: 0.1s; }
+        .skill-item:nth-child(4) { transition-delay: 0.15s; }
+        .skill-item:nth-child(5) { transition-delay: 0.2s; }
+        .skill-item:nth-child(6) { transition-delay: 0.25s; }
+        .skill-item:nth-child(7) { transition-delay: 0.3s; }
+        .skill-item:nth-child(8) { transition-delay: 0.35s; }
+        .skill-item:nth-child(9) { transition-delay: 0.4s; }
+        
+        .blog-card:nth-child(1) { transition-delay: 0s; }
+        .blog-card:nth-child(2) { transition-delay: 0.1s; }
+        .blog-card:nth-child(3) { transition-delay: 0.2s; }
+        .blog-card:nth-child(4) { transition-delay: 0.3s; }
+        .blog-card:nth-child(5) { transition-delay: 0.4s; }
+        .blog-card:nth-child(6) { transition-delay: 0.5s; }
+
+        /* ----- HEADER (MINIMALIS) ----- */
+        .top-header {
+            width: 100%;
+            background-color: #ffffff;
+            border-bottom: 1px solid #e8e8ec;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.4rem;
+            letter-spacing: -0.3px;
+            cursor: pointer;
+            color: #1a1a2e;
+        }
+        .logo span:first-child { color: #2563eb; }
+        .logo span:last-child { color: #64748b; font-weight: 500; }
+
+        .header-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-decoration: none;
+            color: #4a4a6a;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .nav-links a:hover { color: #2563eb; }
+
+        /* Mobile Navigation */
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: #1a1a2e;
+        }
+        .mobile-nav {
+            position: fixed;
+            top: 65px;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-bottom: 1px solid #e8e8ec;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            z-index: 99;
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .mobile-nav.active {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+        }
+        .mobile-nav-container { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 1rem 0; }
+        .mobile-nav a {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            text-decoration: none;
+            color: #4a4a6a;
+            padding: 0.8rem 1.5rem;
+            width: 100%;
+            text-align: center;
+            border-bottom: 1px solid #f0f0f5;
+            cursor: pointer;
+        }
+        .mobile-nav a:hover { color: #2563eb; background: #f8fafc; }
+
+        /* ===== SECTION HOME ===== */
+        .home-section {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 4rem;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        .hero-left { flex: 1; max-width: 600px; }
+        .subtitle-tag {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2563eb;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+        .main-greeting {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.02em;
+        }
+        .desc-text {
+            font-size: 1rem;
+            color: #5a5a7a;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .stats-container { display: flex; gap: 1.5rem; margin-bottom: 2rem; }
+        .stat-box {
+            background: #f8fafc;
+            border: 1px solid #e8e8ec;
+            border-radius: 16px;
+            padding: 1rem 1.2rem;
+            text-align: center;
+            flex: 1;
+        }
+        .stat-number { font-size: 1.8rem; font-weight: 700; color: #2563eb; }
+        .stat-label { font-size: 0.7rem; font-weight: 600; color: #64748b; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .button-group { display: flex; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap; }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.8rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            border-radius: 40px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .btn-primary { background-color: #2563eb; color: #ffffff; border: none; }
+        .btn-primary:hover { background-color: #1d4ed8; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,99,235,0.2); }
+        .btn-secondary { background-color: #f1f5f9; color: #1e293b; border: 1px solid #e2e8f0; }
+        .btn-secondary:hover { background-color: #e2e8f0; transform: translateY(-2px); }
+        
+        .social-section { margin-top: 2rem; }
+        .social-title { font-size: 0.7rem; font-weight: 600; color: #94a3b8; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .social-icons { display: flex; gap: 1rem; }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #4a4a6a;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .social-icon:hover { background: #2563eb; color: #ffffff; transform: translateY(-3px); }
+
+        .hero-right { flex-shrink: 0; }
+        .profile-image-container {
+            width: 380px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #f8fafc;
+            border: 1px solid #e8e8ec;
+        }
+        .profile-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            filter: grayscale(20%);
+            transition: filter 0.5s ease;
+        }
+        .profile-image-container:hover .profile-image {
+            filter: grayscale(0%);
+        }
+
+        /* ===== SECTION ABOUT ===== */
+        .about-section {
+            background: #f8fafc;
+            padding: 5rem 2rem;
+        }
+        .about-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+        .about-left { flex: 1; }
+        .about-image-container {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+        }
+        .about-image { width: 100%; height: auto; display: block; }
+        .about-right { flex: 1; }
+        .section-tag {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #2563eb;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+        .about-title { font-size: 2.2rem; font-weight: 700; color: #1a1a2e; margin-bottom: 1.5rem; }
+        .about-desc { font-size: 0.95rem; color: #5a5a7a; line-height: 1.7; margin-bottom: 1rem; }
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.8rem 1.8rem;
+            background: #ffffff;
+            color: #2563eb;
+            border: 1px solid #e2e8f0;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-decoration: none;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+        .btn-download:hover { background: #2563eb; color: #ffffff; transform: translateY(-2px); }
+
+        /* ===== SECTION PORTFOLIO ===== */
+        .portfolio-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header { text-align: center; margin-bottom: 3rem; }
+        .section-title { font-size: 2rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; }
+        .section-subtitle { color: #64748b; font-size: 0.9rem; }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+        .portfolio-card {
+            background: #ffffff;
+            border: 1px solid #e8e8ec;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .portfolio-card:hover { transform: translateY(-8px); box-shadow: 0 20px 30px rgba(0,0,0,0.05); border-color: #2563eb20; }
+        .portfolio-card-image { height: 200px; overflow: hidden; }
+        .portfolio-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .portfolio-card:hover .portfolio-card-image img { transform: scale(1.05); }
+        .portfolio-card-content { padding: 1.5rem; }
+        .portfolio-card-title { font-size: 1.1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; }
+        .portfolio-card-desc { font-size: 0.8rem; color: #64748b; line-height: 1.5; margin-bottom: 1rem; }
+        .portfolio-tag {
+            display: inline-block;
+            font-size: 0.65rem;
+            padding: 0.2rem 0.8rem;
+            background: #eef2ff;
+            border-radius: 20px;
+            color: #2563eb;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        .portfolio-card-link {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 0.8rem;
+        }
+        .portfolio-card-link:hover { letter-spacing: 0.5px; }
+
+        /* ===== SECTION SKILLS ===== */
+        .skills-section {
+            background: #f8fafc;
+            padding: 5rem 2rem;
+        }
+        .skills-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .skill-item {
+            background: #ffffff;
+            border: 1px solid #e8e8ec;
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .skill-item:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-color: #2563eb30; }
+        .skill-icon { font-size: 2.2rem; margin-bottom: 0.8rem; display: inline-block; }
+        .skill-name { font-weight: 600; font-size: 0.85rem; color: #1a1a2e; }
+
+        /* Warna asli ikon skill */
+        .skill-item:nth-child(1) .skill-icon { color: #1D6F42; }
+        .skill-item:nth-child(2) .skill-icon { color: #2B579A; }
+        .skill-item:nth-child(3) .skill-icon { color: #D35230; }
+        .skill-item:nth-child(4) .skill-icon { color: #D83B01; }
+        .skill-item:nth-child(5) .skill-icon { color: #1BA0D7; }
+        .skill-item:nth-child(6) .skill-icon { color: #007ACC; }
+        .skill-item:nth-child(7) .skill-icon { color: #E44D26; }
+        .skill-item:nth-child(8) .skill-icon { color: #264DE4; }
+        .skill-item:nth-child(9) .skill-icon { color: #F7DF1E; }
+
+        /* ===== SECTION VISI & MISI ===== */
+        .visimisi-section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .visimisi-wrapper {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        .visi-card, .misi-card {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e8e8ec;
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        .visi-card h3, .misi-card h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .visi-card h3 i, .misi-card h3 i { color: #2563eb; }
+        .visi-card p, .misi-card p { color: #5a5a7a; line-height: 1.6; }
+        .misi-list { list-style: none; padding: 0; }
+        .misi-list li {
+            color: #5a5a7a;
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .misi-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #2563eb;
+        }
+
+        /* ===== SECTION BLOG ===== */
+        .blog-section {
+            background: #f8fafc;
+            padding: 5rem 2rem;
+        }
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        .blog-card {
+            background: #ffffff;
+            border: 1px solid #e8e8ec;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .blog-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.05); }
+        .blog-card-image { height: 160px; overflow: hidden; }
+        .blog-card-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .blog-card:hover .blog-card-image img { transform: scale(1.05); }
+        .blog-card-content { padding: 1.5rem; }
+        .blog-date { font-size: 0.7rem; font-weight: 600; color: #2563eb; margin-bottom: 0.5rem; text-transform: uppercase; }
+        .blog-card h3 { font-size: 1rem; font-weight: 700; color: #1a1a2e; margin-bottom: 0.5rem; }
+        .blog-card p { font-size: 0.8rem; color: #64748b; line-height: 1.5; margin-bottom: 1rem; }
+        .blog-readmore {
+            color: #2563eb;
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .blog-readmore:hover { letter-spacing: 0.5px; }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: #1a1a2e;
+            padding: 3rem 2rem 1.5rem;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+        .footer-col h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+        .footer-col p, .footer-col a {
+            font-size: 0.8rem;
+            color: #94a3b8;
+            text-decoration: none;
+            line-height: 1.8;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .footer-col a:hover { color: #ffffff; transform: translateX(3px); }
+        .footer-social { display: flex; gap: 0.8rem; margin-top: 1rem; }
+        .footer-social a {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .footer-social a:hover { background: #2563eb; color: #ffffff; transform: translateY(-3px); }
+        .footer-form { display: flex; flex-direction: column; gap: 0.8rem; }
+        .footer-form input, .footer-form textarea {
+            padding: 0.7rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 0.8rem;
+        }
+        .footer-form input:focus, .footer-form textarea:focus { outline: none; border-color: #2563eb; }
+        .footer-form button {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 0.7rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .footer-form button:hover { background: #1d4ed8; transform: translateY(-2px); }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.7rem;
+            color: #64748b;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+            .blog-grid { grid-template-columns: repeat(2, 1fr); }
+            .skills-grid { grid-template-columns: repeat(3, 1fr); }
+            .footer-container { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .top-header { padding: 0.8rem 1.2rem; }
+            .nav-links { display: none; }
+            .mobile-nav-toggle { display: block; }
+            .home-section { flex-direction: column; padding: 2rem 1.5rem; text-align: center; }
+            .hero-left { max-width: 100%; }
+            .stats-container { flex-direction: column; }
+            .button-group { justify-content: center; }
+            .social-icons { justify-content: center; }
+            .hero-right { margin-top: 1rem; }
+            .profile-image-container { width: 280px; margin: 0 auto; }
+            .about-container { flex-direction: column; text-align: center; }
+            .about-right { text-align: center; }
+            .portfolio-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .visimisi-wrapper { flex-direction: column; }
+            .blog-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr; text-align: center; }
+            .footer-social { justify-content: center; }
+        }
+        @media (min-width: 769px) {
+            .mobile-nav { display: none !important; }
+            .mobile-nav-toggle { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========== HEADER ========== -->
+    <header class="top-header">
+        <div class="logo" id="brandHome">
+            <span>rehan</span><span>.web.id</span>
+        </div>
+        <div class="header-right">
+            <div class="nav-links">
+                <a class="nav-home">Home</a>
+                <a class="nav-about">About</a>
+                <a class="nav-portfolio">Portfolio</a>
+                <a class="nav-skills">Skills</a>
+                <a class="nav-visimisi">Vision</a>
+                <a class="nav-blog">Blog</a>
+            </div>
+            <button class="mobile-nav-toggle" id="mobileNavToggle"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+    
+    <div class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-container">
+            <a class="mobile-nav-home">Home</a>
+            <a class="mobile-nav-about">About</a>
+            <a class="mobile-nav-portfolio">Portfolio</a>
+            <a class="mobile-nav-skills">Skills</a>
+            <a class="mobile-nav-visimisi">Vision</a>
+            <a class="mobile-nav-blog">Blog</a>
+        </div>
+    </div>
+
+    <!-- ========== HOME ========== -->
+    <section class="home-section" id="home">
+        <div class="hero-left">
+            <div class="subtitle-tag reveal">Network Engineer & Web Developer</div>
+            <h1 class="main-greeting reveal">Hello, I'm <span style="color:#2563eb;">Rehan</span></h1>
+            <div class="desc-text reveal">Crafting resilient network architectures & seamless full-stack experiences — from low‑level TCP handshakes to responsive React components.</div>
+            <div class="stats-container">
+                <div class="stat-box stagger-item"><div class="stat-number">3+</div><div class="stat-label">Years experience</div></div>
+                <div class="stat-box stagger-item"><div class="stat-number">28</div><div class="stat-label">Projects complete</div></div>
+                <div class="stat-box stagger-item"><div class="stat-number">7</div><div class="stat-label">Happy clients</div></div>
+            </div>
+            <div class="button-group reveal">
+                <a class="btn btn-primary" href="#portfolio"><i class="fas fa-folder-open"></i> View Portfolio</a>
+                <a class="btn btn-secondary" href="#footer"><i class="fas fa-envelope"></i> Contact Me</a>
+            </div>
+            <div class="social-section reveal">
+                <div class="social-title">Find me on</div>
+                <div class="social-icons">
+                    <a href="#" class="social-icon stagger-item" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon stagger-item" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon stagger-item" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon stagger-item" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-right reveal">
+            <div class="profile-image-container">
+                <img class="profile-image" src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=500&h=500&fit=crop" alt="Rehan">
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ABOUT ========== -->
+    <section class="about-section" id="about">
+        <div class="about-container">
+            <div class="about-left reveal">
+                <div class="about-image-container">
+                    <img class="about-image" src="https://images.unsplash.com/photo-1534972195531-d756b9bfa9f2?w=600&h=750&fit=crop" alt="Rehan Profile">
+                </div>
+            </div>
+            <div class="about-right reveal">
+                <div class="section-tag">About Me</div>
+                <h2 class="about-title">Who Am I?</h2>
+                <div class="about-desc">I'm Rehan — a 17-year-old tech enthusiast from Indonesia with an insatiable curiosity for how things work. Since childhood, I've been fascinated by computers, networks, and the logic behind every line of code.</div>
+                <div class="about-desc">As a Network Engineer, I specialize in designing, implementing, and securing robust network infrastructures. From configuring Cisco devices to analyzing packet flows with Wireshark, I ensure seamless connectivity and optimal performance.</div>
+                <div class="about-desc">As a Web Developer, I craft responsive, user-centric web applications using modern technologies like React, Node.js, and various CSS frameworks. I enjoy bridging the gap between backend logic and frontend aesthetics.</div>
+                <a class="btn-download" href="#"><i class="fas fa-download"></i> Download CV</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== PORTFOLIO ========== -->
+    <section class="portfolio-section" id="portfolio">
+        <div class="section-header reveal">
+            <div class="section-title">My Portfolio</div>
+            <div class="section-subtitle">Some of my recent work & projects</div>
+        </div>
+        <div class="portfolio-grid">
+            <div class="portfolio-card stagger-item"><div class="portfolio-card-image"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=400&fit=crop" alt="Network Security"></div><div class="portfolio-card-content"><h3 class="portfolio-card-title">Network Security Suite</h3><p class="portfolio-card-desc">Advanced network monitoring and threat detection system with real-time alerts.</p><div><span class="portfolio-tag">Python</span><span class="portfolio-tag">Cisco</span><span class="portfolio-tag">Wireshark</span></div><a href="#" class="portfolio-card-link">View Project →</a></div></div>
+            <div class="portfolio-card stagger-item"><div class="portfolio-card-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="Dashboard"></div><div class="portfolio-card-content"><h3 class="portfolio-card-title">Full Stack Dashboard</h3><p class="portfolio-card-desc">Complete admin dashboard with analytics, user management, and real-time data.</p><div><span class="portfolio-tag">React</span><span class="portfolio-tag">Node.js</span><span class="portfolio-tag">MongoDB</span></div><a href="#" class="portfolio-card-link">View Project →</a></div></div>
+            <div class="portfolio-card stagger-item"><div class="portfolio-card-image"><img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=600&h=400&fit=crop" alt="Cloud"></div><div class="portfolio-card-content"><h3 class="portfolio-card-title">Cloud Infrastructure</h3><p class="portfolio-card-desc">Scalable cloud architecture with automated deployment and monitoring.</p><div><span class="portfolio-tag">AWS</span><span class="portfolio-tag">Docker</span><span class="portfolio-tag">K8s</span></div><a href="#" class="portfolio-card-link">View Project →</a></div></div>
+            <div class="portfolio-card stagger-item"><div class="portfolio-card-image"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop" alt="E-commerce"></div><div class="portfolio-card-content"><h3 class="portfolio-card-title">E-commerce Platform</h3><p class="portfolio-card-desc">Modern e-commerce solution with payment gateway integration.</p><div><span class="portfolio-tag">Next.js</span><span class="portfolio-tag">PostgreSQL</span><span class="portfolio-tag">Stripe</span></div><a href="#" class="portfolio-card-link">View Project →</a></div></div>
+            <div class="portfolio-card stagger-item"><div class="portfolio-card-image"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=400&fit=crop" alt="Mobile App"></div><div class="portfolio-card-content"><h3 class="portfolio-card-title">Mobile App Development</h3><p class="portfolio-card-desc">Cross-platform mobile app for task management and productivity.</p><div><span class="portfolio-tag">Flutter</span><span class="portfolio-tag">Firebase</span><span class="portfolio-tag">REST API</span></div><a href="#" class="portfolio-card-link">View Project →</a></div></div>
+            <div class="portfolio-card stagger-item"><div class="portfolio-card-image"><img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=600&h=400&fit=crop" alt="IoT"></div><div class="portfolio-card-content"><h3 class="portfolio-card-title">IoT Smart Home</h3><p class="portfolio-card-desc">Smart home automation system with device control and monitoring.</p><div><span class="portfolio-tag">Arduino</span><span class="portfolio-tag">MQTT</span><span class="portfolio-tag">React Native</span></div><a href="#" class="portfolio-card-link">View Project →</a></div></div>
+        </div>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section class="skills-section" id="skills">
+        <div class="skills-container">
+            <div class="section-header reveal">
+                <div class="section-title">My Skills</div>
+                <div class="section-subtitle">Technologies & tools I work with</div>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fas fa-file-excel"></i></div><div class="skill-name">Microsoft Excel</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fas fa-file-word"></i></div><div class="skill-name">Microsoft Word</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fas fa-file-powerpoint"></i></div><div class="skill-name">PowerPoint</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fas fa-project-diagram"></i></div><div class="skill-name">Microsoft Visio</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fas fa-network-wired"></i></div><div class="skill-name">Cisco PT</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fas fa-code"></i></div><div class="skill-name">VS Code</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fab fa-html5"></i></div><div class="skill-name">HTML5</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fab fa-css3-alt"></i></div><div class="skill-name">CSS3</div></div>
+                <div class="skill-item stagger-item"><div class="skill-icon"><i class="fab fa-js"></i></div><div class="skill-name">JavaScript</div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== VISION & MISSION ========== -->
+    <section class="visimisi-section" id="visimisi">
+        <div class="section-header reveal">
+            <div class="section-title">Vision & Mission</div>
+            <div class="section-subtitle">My professional direction</div>
+        </div>
+        <div class="visimisi-wrapper">
+            <div class="visi-card reveal"><h3><i class="fas fa-eye"></i> Vision</h3><p>To become an innovative and trustworthy Network Engineer and Web Developer, capable of providing technological solutions that have a positive impact on society and the digital industry in Indonesia and the world.</p></div>
+            <div class="misi-card reveal"><h3><i class="fas fa-check-circle"></i> Mission</h3><ul class="misi-list"><li>Continuously learn and keep up with the latest technology trends</li><li>Build secure, scalable, and user-friendly networks and applications</li><li>Collaborate with teams and clients to create the best solutions</li><li>Make real contributions through open source and social projects</li></ul></div>
+        </div>
+    </section>
+
+    <!-- ========== BLOG ========== -->
+    <section class="blog-section" id="blog">
+        <div class="blog-container">
+            <div class="section-header reveal">
+                <div class="section-title">Personal Blog</div>
+                <div class="section-subtitle">Experience & career journey</div>
+            </div>
+            <div class="blog-grid">
+                <div class="blog-card stagger-item"><div class="blog-card-image"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="First client"></div><div class="blog-card-content"><div class="blog-date">March 15, 2024</div><h3>First Experience with a Client</h3><p>Working on a company profile website project for a local SME.</p><a href="#" class="blog-readmore">Read more →</a></div></div>
+                <div class="blog-card stagger-item"><div class="blog-card-image"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=400&fit=crop" alt="Network"></div><div class="blog-card-content"><div class="blog-date">February 2, 2024</div><h3>Building an Office Network</h3><p>Configuring Cisco routers, switches, and access points for 50 users.</p><a href="#" class="blog-readmore">Read more →</a></div></div>
+                <div class="blog-card stagger-item"><div class="blog-card-image"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=400&fit=crop" alt="E-commerce"></div><div class="blog-card-content"><div class="blog-date">January 10, 2024</div><h3>Launching Full-Stack E-commerce</h3><p>E-commerce platform with payment gateway. 1000+ users first day.</p><a href="#" class="blog-readmore">Read more →</a></div></div>
+                <div class="blog-card stagger-item"><div class="blog-card-image"><img src="https://images.unsplash.com/photo-1599658880436-c61792e70672?w=600&h=400&fit=crop" alt="Workshop"></div><div class="blog-card-content"><div class="blog-date">December 5, 2023</div><h3>Network Security Workshop</h3><p>Being a mentor in a cybersecurity workshop for students.</p><a href="#" class="blog-readmore">Read more →</a></div></div>
+                <div class="blog-card stagger-item"><div class="blog-card-image"><img src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=600&h=400&fit=crop" alt="Mobile app"></div><div class="blog-card-content"><div class="blog-date">November 20, 2023</div><h3>Mobile App for SMEs</h3><p>Developing inventory management app using Flutter and Firebase.</p><a href="#" class="blog-readmore">Read more →</a></div></div>
+                <div class="blog-card stagger-item"><div class="blog-card-image"><img src="https://images.unsplash.com/photo-1543286386-713bdd548da4?w=600&h=400&fit=crop" alt="Certification"></div><div class="blog-card-content"><div class="blog-date">October 1, 2023</div><h3>AWS Cloud Practitioner</h3><p>Achieved AWS Cloud Practitioner certification after 2 months study.</p><a href="#" class="blog-readmore">Read more →</a></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== FOOTER ========== -->
+    <footer class="footer" id="footer">
+        <div class="footer-container">
+            <div class="footer-col"><h4>rehan.web.id</h4><p>Network Engineer & Web Developer based in Indonesia. Building innovative digital solutions.</p><div class="footer-social"><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div>
+            <div class="footer-col"><h4>Quick Links</h4><a class="footer-nav-home">Home</a><a class="footer-nav-about">About</a><a class="footer-nav-portfolio">Portfolio</a><a class="footer-nav-skills">Skills</a><a class="footer-nav-visimisi">Vision</a><a class="footer-nav-blog">Blog</a></div>
+            <div class="footer-col"><h4>Contact</h4><p><i class="fas fa-envelope"></i> rehan@example.com</p><p><i class="fas fa-phone"></i> +62 812 3456 7890</p><p><i class="fas fa-map-marker-alt"></i> Indonesia</p></div>
+            <div class="footer-col"><h4>Send Message</h4><form class="footer-form" id="footerForm"><input type="text" placeholder="Your Name" id="footerName" required><input type="email" placeholder="Your Email" id="footerEmail" required><textarea rows="2" placeholder="Message..." id="footerMessage" required></textarea><button type="submit">Send <i class="fas fa-paper-plane"></i></button></form></div>
+        </div>
+        <div class="footer-bottom"><p>&copy; 2024 rehan.web.id. All rights reserved.</p></div>
+    </footer>
+
+    <script>
+        // Scroll Reveal
+        const revealElements = document.querySelectorAll('.reveal, .stagger-item');
+        function checkReveal() {
+            const windowHeight = window.innerHeight;
+            const threshold = 100;
+            revealElements.forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < windowHeight - threshold) {
+                    if (el.classList.contains('stagger-item')) el.classList.add('reveal-stagger');
+                    else el.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('load', checkReveal);
+        window.addEventListener('scroll', checkReveal);
+        window.addEventListener('resize', checkReveal);
+
+        // Scroll Function
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                const offset = 70;
+                window.scrollTo({ top: section.offsetTop - offset, behavior: 'smooth' });
+            }
+        }
+
+        // Navigation
+        document.querySelectorAll('.nav-home, .mobile-nav-home, .footer-nav-home, .logo').forEach(el => {
+            el.addEventListener('click', () => scrollToSection('home'));
+        });
+        document.querySelectorAll('.nav-about, .mobile-nav-about, .footer-nav-about').forEach(el => {
+            el.addEventListener('click', () => scrollToSection('about'));
+        });
+        document.querySelectorAll('.nav-portfolio, .mobile-nav-portfolio, .footer-nav-portfolio, .btn-primary').forEach(el => {
+            el.addEventListener('click', () => scrollToSection('portfolio'));
+        });
+        document.querySelectorAll('.nav-skills, .mobile-nav-skills, .footer-nav-skills').forEach(el => {
+            el.addEventListener('click', () => scrollToSection('skills'));
+        });
+        document.querySelectorAll('.nav-visimisi, .mobile-nav-visimisi, .footer-nav-visimisi').forEach(el => {
+            el.addEventListener('click', () => scrollToSection('visimisi'));
+        });
+        document.querySelectorAll('.nav-blog, .mobile-nav-blog, .footer-nav-blog').forEach(el => {
+            el.addEventListener('click', () => scrollToSection('blog'));
+        });
+        document.querySelectorAll('.btn-secondary').forEach(el => {
+            el.addEventListener('click', () => document.querySelector('.footer').scrollIntoView({ behavior: 'smooth' }));
+        });
+
+        // Mobile Nav Toggle
+        const mobileNavToggle = document.getElementById('mobileNavToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileNavToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            const icon = mobileNavToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+        });
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                document.body.style.overflow = '';
+                mobileNavToggle.querySelector('i').classList.add('fa-bars');
+                mobileNavToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // Form
+        const footerForm = document.getElementById('footerForm');
+        footerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('footerName').value;
+            const email = document.getElementById('footerEmail').value;
+            const message = document.getElementById('footerMessage').value;
+            window.location.href = `mailto:rehan@example.com?subject=Message from ${name} via rehan.web.id&body=Name: ${name}%0AEmail: ${email}%0A%0AMessage:%0A${message}`;
+            alert('Your message will open in your email app. Thank you!');
+            footerForm.reset();
+        });
+
+        // Security
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'u')) {
+                e.preventDefault();
+                alert('This function is disabled.');
+                return false;
+            }
+        });
+        document.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // ========== FITUR RAHASIA VVV - REUSE TAB (TIDAK BERANAK PINAK) ==========
+        let vCount = 0;
+        let vTimeout;
+        let secretTab = null;
+        const secretUrl = "dark.html";
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'v' || e.key === 'V') {
+                vCount++;
+                clearTimeout(vTimeout);
+                vTimeout = setTimeout(() => { vCount = 0; }, 1000);
+                
+                if (vCount === 3) {
+                    vCount = 0;
+                    
+                    if (secretTab && !secretTab.closed) {
+                        secretTab.focus();
+                    } else {
+                        secretTab = window.open(secretUrl, '_blank');
+                    }
+                    
+                    const feedback = document.createElement('div');
+                    feedback.textContent = '🔗 Opening URL...';
+                    feedback.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#2563eb;color:white;padding:8px 16px;border-radius:8px;font-family:monospace;font-size:12px;z-index:9999';
+                    document.body.appendChild(feedback);
+                    setTimeout(() => feedback.remove(), 2000);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
